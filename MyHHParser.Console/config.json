@@ -1,0 +1,18 @@
+{
+  "HhApi": {
+    "BaseUrl": "https://api.hh.ru",
+    "UserAgent": "MyHHParser/1.0 (contact@example.com)",
+    "TimeoutSeconds": 30
+  },
+  "Search": {
+    "Text": "C# developer",
+    "Area": 1,
+    "PerPage": 50,
+    "Pages": 5,
+    "OnlyWithSalary": false
+  },
+  "Parser": {
+    "DelayMs": 500,
+    "OutputPath": "vacancies.json"
+  }
+}
