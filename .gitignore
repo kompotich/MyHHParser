@@ -101,6 +101,11 @@ secrets.json
 .env.*
 !.env.example
 
+## SQLite
+*.db
+*.db-shm
+*.db-wal
+
 ## Misc
 *.log
 *.tmp

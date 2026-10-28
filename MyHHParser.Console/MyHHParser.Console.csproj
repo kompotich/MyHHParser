@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\MyHHParser.Core\MyHHParser.Core.csproj" />
+        <ProjectReference Include="..\MyHHParser.Data\MyHHParser.Data.csproj" />
     </ItemGroup>
 
     <ItemGroup>

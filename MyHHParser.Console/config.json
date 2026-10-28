@@ -14,5 +14,8 @@
   "Parser": {
     "DelayMs": 500,
     "OutputPath": "vacancies.json"
+  },
+  "Database": {
+    "ConnectionString": "Data Source=myhhparser.db"
   }
 }

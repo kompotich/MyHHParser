@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MyHHParser.Core.Configuration;
+using MyHHParser.Core.Services;
 
 namespace MyHHParser.Core.DependencyInjection;
 
@@ -14,6 +15,8 @@ public static class ServiceCollectionExtensions
 		services.Configure<HhApiOptions>(configuration.GetSection(HhApiOptions.SectionName));
 		services.Configure<SearchOptions>(configuration.GetSection(SearchOptions.SectionName));
 		services.Configure<ParserOptions>(configuration.GetSection(ParserOptions.SectionName));
+
+		services.AddScoped<IVacancySearchService, HhVacancySearchService>();
 
 		services.AddHttpClient(HhHttpClientName, (sp, client) =>
 		{

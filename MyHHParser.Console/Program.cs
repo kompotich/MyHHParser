@@ -1,21 +1,21 @@
-﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MyHHParser.Core.DependencyInjection;
+using MyHHParser.Core.Services;
+using MyHHParser.Data.Repositories;
 
 namespace MyHHParser.Console;
 
 public class Program
 {
-	public static void Main(string[] args)
+	public static async Task Main(string[] args)
 	{
-		var builder = Host.CreateApplicationBuilder(args);
+		using var host = ConsoleHostFactory.Create(args);
+		await DatabaseInitializer.InitializeAsync(host.Services);
 
-		builder.Configuration.AddJsonFile("config.json", optional: false, reloadOnChange: true);
-		builder.Services.AddHhParserCore(builder.Configuration);
-
-		using var host = builder.Build();
-
-		_ = host.Services.GetRequiredService<IHttpClientFactory>();
+		using var scope = host.Services.CreateScope();
+		var vacancySearchService = scope.ServiceProvider.GetRequiredService<IVacancySearchService>();
+		var vacancies = await vacancySearchService.GetVacanciesAsync();
+		var vacancyRepository = scope.ServiceProvider.GetRequiredService<IVacancyRepository>();
+		await vacancyRepository.SaveAsync(vacancies);
+		VacancyConsolePrinter.Print(vacancies);
 	}
 }
